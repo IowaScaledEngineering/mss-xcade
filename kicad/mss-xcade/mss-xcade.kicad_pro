@@ -477,6 +477,10 @@
     [
       "31b77d91-108f-43ee-ade2-30d318a1d1b8",
       "MSS Bus Interface"
+    ],
+    [
+      "a6b896fc-e0df-4bd2-b725-ef56d408a27b",
+      "Signals & Sensors"
     ]
   ],
   "text_variables": {}
