@@ -190,45 +190,55 @@ int main(void)
 	wdt_reset();            // Reset the WDT, just in case it's still enabled over reset
 	wdt_enable(WDTO_1S);    // Enable it at a 1S timeout.
 
+#define SIGNAL_HEAD_0_DEF   &PORTD, _BV(PD0), &PORTD, _BV(PD1), &PORTD, _BV(PD2)
+#define SIGNAL_HEAD_1_DEF   &PORTD, _BV(PD3), &PORTD, _BV(PD4), &PORTA, _BV(PA2)
+#define SIGNAL_HEAD_2_DEF   &PORTA, _BV(PA3), &PORTB, _BV(PB6), &PORTB, _BV(PB7)
+#define SIGNAL_HEAD_3_DEF   &PORTD, _BV(PD5), &PORTD, _BV(PD6), &PORTD, _BV(PD7)
+#define SIGNAL_HEAD_4_DEF   &PORTB, _BV(PB0), &PORTB, _BV(PB1), &PORTB, _BV(PB2)
+#define SIGNAL_HEAD_5_DEF   &PORTB, _BV(PB3), &PORTB, _BV(PB4), &PORTB, _BV(PB5)
+#define SIGNAL_HEAD_6_DEF   &PORTC, _BV(PC7), &PORTA, _BV(PA1), &PORTC, _BV(PC3)
+#define SIGNAL_HEAD_7_DEF   &PORTC, _BV(PC1), &PORTC, _BV(PC2), &PORTC, _BV(PC3)
+
+
 	// PORT A
-	//  PA7 - Input  - B MSS - Adjacent
-	//  PA6 - Input  - B MSS - Approach
-	//  PA5 - Input  - B MSS - Advance Approach
-	//  PA4 - Input  - A MSS - Adjacent
-	//  PA3 - Input  - A MSS - Approach
-	//  PA2 - Input  - A MSS - Advance Approach
-	//  PA1 - Analog - Options 1
-	//  PA0 - Analog - Options 0
+	//  PA7 - n/a
+	//  PA6 - n/a
+	//  PA5 - n/a
+	//  PA4 - n/a
+	//  PA3 - Input  - B1 Signal - RED
+	//  PA2 - Input  - A2 Signal - GREEN
+	//  PA1 - Output - D1 Signal - YELLOW
+	//  PA0 - Input  - Common anode / common cathode sense (1 = common anode)
 
 	// PORT B
-	//  PB7 - n/a    - /RESET (not I/O pin)
-	//  PB6 - Output - B Signal - GREEN  (low=active)
-	//  PB5 - Output - B Signal - YELLOW (low=active)
-	//  PB5 - Output - B Signal - RED (low=active)
-	//  PB3 - Input  - Common anode / common cathode sense (1 = common anode)
-	//  PB2 - Output - A Signal - GREEN (low=active)
-	//  PB1 - Output - A Signal - YELLOW (low=active)
-	//  PB0 - Output - A Signal - RED (low=active)
+	//  PB7 - Output - B1 Signal - GREEN
+	//  PB6 - Output - B1 Signal - YELLOW
+	//  PB5 - Output - C2 Signal - GREEN
+	//  PB4 - Output - C2 Signal - YELLOW
+	//  PB3 - Output - C2 Signal - RED
+	//  PB2 - Output - C1 Signal - GREEN
+	//  PB1 - Output - C1 Signal - YELLOW
+	//  PB0 - Output - C1 Signal - RED
 
-	// PORT B
-	//  PB7 - n/a    - /RESET (not I/O pin)
-	//  PB6 - Output - B Signal - GREEN  (low=active)
-	//  PB5 - Output - B Signal - YELLOW (low=active)
-	//  PB5 - Output - B Signal - RED (low=active)
-	//  PB3 - Input  - Common anode / common cathode sense (1 = common anode)
-	//  PB2 - Output - A Signal - GREEN (low=active)
-	//  PB1 - Output - A Signal - YELLOW (low=active)
-	//  PB0 - Output - A Signal - RED (low=active)
+	// PORT C
+	//  PC7 - Output - D1 Signal - RED
+	//  PC6 - n/a    - /RESET (not I/O pin)
+	//  PC5 - n/a    - SCL
+	//  PC4 - n/a    - SDA
+	//  PC3 - Output - D2 Signal - GREEN
+	//  PC2 - Output - D2 Signal - YELLOW
+	//  PC1 - Output - D2 Signal - RED
+	//  PC0 - Output - D1 Signal - GREEN
 
 	// PORT D
-	//  PB7 - n/a    - /RESET (not I/O pin)
-	//  PB6 - Output - B Signal - GREEN  (low=active)
-	//  PB5 - Output - B Signal - YELLOW (low=active)
-	//  PB5 - Output - B Signal - RED (low=active)
-	//  PB3 - Input  - Common anode / common cathode sense (1 = common anode)
-	//  PB2 - Output - A Signal - GREEN (low=active)
-	//  PB1 - Output - A Signal - YELLOW (low=active)
-	//  PB0 - Output - A Signal - RED (low=active)
+	//  PD7 - Output - B2 Signal - GREEN
+	//  PD6 - Output - B2 Signal - YELLOW
+	//  PD5 - Output - B2 Signal - RED
+	//  PD4 - Output - A2 Signal - YELLOW
+	//  PD3 - Output - A2 Signal - RED
+	//  PD2 - Output - A1 Signal - GREEN
+	//  PD1 - Output - A1 Signal - YELLOW
+	//  PD0 - Output - A1 Signal - RED
 
 
 	PORTA = 0b00000001;
@@ -237,11 +247,11 @@ int main(void)
 	PORTB = 0b00000000;
 	DDRB  = 0b11111111;
 
-	PORTC = 0b00000000;
-	DDRC  = 0b11001111;
+	PORTC = 0b00110000;
+	DDRC  = 0b10001111;
 
 	PORTD = 0b00000000;
-	DDRD  = 0b11111101;
+	DDRD  = 0b11111111;
 
 	initializeTimer();
 	initializeI2C();
