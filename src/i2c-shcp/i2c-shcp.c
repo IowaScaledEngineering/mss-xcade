@@ -65,7 +65,7 @@ const uint8_t i2c_registerMapSize= I2C_REGISTER_MAP_SIZE;
 #define SIGNAL_HEAD_3_DEF   &PORTD, _BV(PD5), &PORTD, _BV(PD6), &PORTD, _BV(PD7)
 #define SIGNAL_HEAD_4_DEF   &PORTB, _BV(PB0), &PORTB, _BV(PB1), &PORTB, _BV(PB2)
 #define SIGNAL_HEAD_5_DEF   &PORTB, _BV(PB3), &PORTB, _BV(PB4), &PORTB, _BV(PB5)
-#define SIGNAL_HEAD_6_DEF   &PORTC, _BV(PC7), &PORTA, _BV(PA1), &PORTC, _BV(PC3)
+#define SIGNAL_HEAD_6_DEF   &PORTC, _BV(PC7), &PORTA, _BV(PA1), &PORTC, _BV(PC0)
 #define SIGNAL_HEAD_7_DEF   &PORTC, _BV(PC1), &PORTC, _BV(PC2), &PORTC, _BV(PC3)
 
 #define SENSE_COMMON_ANODE 0x01
@@ -189,16 +189,6 @@ int main(void)
 	MCUSR = 0;              // Clear reset status
 	wdt_reset();            // Reset the WDT, just in case it's still enabled over reset
 	wdt_enable(WDTO_1S);    // Enable it at a 1S timeout.
-
-#define SIGNAL_HEAD_0_DEF   &PORTD, _BV(PD0), &PORTD, _BV(PD1), &PORTD, _BV(PD2)
-#define SIGNAL_HEAD_1_DEF   &PORTD, _BV(PD3), &PORTD, _BV(PD4), &PORTA, _BV(PA2)
-#define SIGNAL_HEAD_2_DEF   &PORTA, _BV(PA3), &PORTB, _BV(PB6), &PORTB, _BV(PB7)
-#define SIGNAL_HEAD_3_DEF   &PORTD, _BV(PD5), &PORTD, _BV(PD6), &PORTD, _BV(PD7)
-#define SIGNAL_HEAD_4_DEF   &PORTB, _BV(PB0), &PORTB, _BV(PB1), &PORTB, _BV(PB2)
-#define SIGNAL_HEAD_5_DEF   &PORTB, _BV(PB3), &PORTB, _BV(PB4), &PORTB, _BV(PB5)
-#define SIGNAL_HEAD_6_DEF   &PORTC, _BV(PC7), &PORTA, _BV(PA1), &PORTC, _BV(PC3)
-#define SIGNAL_HEAD_7_DEF   &PORTC, _BV(PC1), &PORTC, _BV(PC2), &PORTC, _BV(PC3)
-
 
 	// PORT A
 	//  PA7 - n/a
