@@ -1,0 +1,10 @@
+** Drc report for /home/ndholmes/data/projects/mss-xcade/kicad/mss-xcade-can/mss-xcade-can.kicad_pcb **
+** Created on 2025-04-04 15:15:04 **
+
+** Found 0 DRC violations **
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **
