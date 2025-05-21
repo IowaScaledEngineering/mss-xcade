@@ -91,10 +91,12 @@ uint32_t getMillis()
 	return retmillis;
 }
 
+volatile uint8_t flasher = 0;
+volatile bool updateSignals = false;
+
 ISR(TIMER0_COMPA_vect) 
 {
 	static uint8_t flasherCounter = 0;
-	static uint8_t flasher = 0;
 	static uint8_t pwmPhase = 0;
 	static uint8_t subMillisCounter = 0;
 	
@@ -135,9 +137,7 @@ ISR(TIMER0_COMPA_vect)
 
 		// We rolled over the PWM counter, calculate the next PWM widths
 		// This runs at 125 frames/second essentially
-
-		for (uint8_t i=0; i<MAX_SIGNAL_HEADS; i++)
-			signalHeadISR_AspectToNextPWM(&signal[i], flasher, signalHeadOptions[i]);
+		updateSignals = true;
 	}
 }
 
@@ -263,6 +263,14 @@ int main(void)
 	while(1)
 	{
 		wdt_reset();
+
+		if (updateSignals)
+		{
+			updateSignals = false;
+			for (uint8_t i=0; i<MAX_SIGNAL_HEADS; i++)
+				signalHeadISR_AspectToNextPWM(&signal[i], flasher, signalHeadOptions[i]);
+		}
+
 		currentTime = getMillis();
 
 		// Because debouncing and such is built into option reading and the MSS library, only 
