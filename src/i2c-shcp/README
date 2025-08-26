@@ -1,0 +1,5 @@
+Attiny48 Instructions:
+
+- Download attiny series atpack from: http://packs.download.atmel.com/
+- It's just a zip file, make a directory and unzip it somewhere
+- Change the ATPACK_DIR variable in the Makefile-tiny48 file to point to it
