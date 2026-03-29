@@ -58,7 +58,7 @@ LICENSE:
 
 
 
-const uint16_t const searchlightPWMsThroughRed[] PROGMEM = 
+const uint16_t searchlightPWMsThroughRed[] PROGMEM = 
 { 
 	DRU_TO_UINT16( 27,  0,  0),
 	DRU_TO_UINT16( 17,  0,  0),
@@ -94,7 +94,7 @@ const uint16_t const searchlightPWMsThroughRed[] PROGMEM =
 	DRU_TO_UINT16(  0,  0, 31)
 };
 
-const uint16_t const searchlightPWMsInvolvingRed[] PROGMEM = { 
+const uint16_t searchlightPWMsInvolvingRed[] PROGMEM = { 
 	DRU_TO_UINT16( 31,  0,  0),
 	DRU_TO_UINT16( 27,  0,  0),
 	DRU_TO_UINT16( 22,  0,  0),
@@ -117,7 +117,7 @@ const uint16_t const searchlightPWMsInvolvingRed[] PROGMEM = {
 	DRU_TO_UINT16(  0,  0, 31)
 };
 
-const uint16_t const fadePWMs[] PROGMEM = 
+const uint16_t fadePWMs[] PROGMEM = 
 { 
 	DRU_TO_UINT16( 30,  0,  0),
 	DRU_TO_UINT16( 28,  0,  0),
