@@ -56,7 +56,7 @@ ISR(TWI_vect)
 	static uint8_t i2c_registerIdx=0;
 
 	uint8_t i;
-	switch (TWSR)
+	switch (TWSR & 0xF8)
 	{
 		case I2C_STX_ADR_ACK:              // Own SLA+R has been received; ACK has been returned
 			i2c_txIdx   = i2c_registerIdx;   // Set buffer pointer to first data location
@@ -124,7 +124,8 @@ ISR(TWI_vect)
 //    case I2C_NO_STATE              // No relevant state information available; TWINT = \930\94
 		case I2C_BUS_ERROR:         // Bus error due to an illegal START or STOP condition
 			i2c_state = TWSR;                 //Store TWI State as errormessage, operation also clears noErrors bit
-			TWCR = _BV(TWSTO) | _BV(TWINT); //Recover from I2C_BUS_ERROR, this will release the SDA and SCL pins thus enabling other devices to use the bus
+			TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWSTO) | _BV(TWINT) | _BV(TWEA);
+			i2c_busy = false;
 			break;
 
 		default:     
